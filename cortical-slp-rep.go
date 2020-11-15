@@ -1,7 +1,6 @@
 // Sleep-replay model developed in Emergent (www.github.com/emer/emergent)
-// Authors: Anna Schapiro, Dhairyya Singh
+// cortical-slp-rep runs a cortical version of slp-rep (www.github.com/schapirolab/slp-rep)
 
-// slp-rep runs a hippocampal model on the structured satellite learning task (see Schapiro et al. (2017))
 package main
 
 import (
@@ -432,7 +431,7 @@ func (ss *Sim) UpdateView(state string) { // changed from boolean to string
 	}
 }
 
-// SleepCycInit prepares the network for sleep
+// SleepCycInit prepares the network for spontaneous sleep
 func (ss *Sim) SleepCycInit() {
 
 	ss.Time.Reset()
@@ -473,7 +472,7 @@ func (ss *Sim) SleepCycInit() {
 	}
 }
 
-// BackToWake terminates sleep and sets the network up for wake training/testing again
+// BackToWake terminates spontaneous sleep and sets the network up for wake training/testing again
 func (ss *Sim) BackToWake() {
 	// Effwt back to =Wt
 	if ss.SynDep {
@@ -817,7 +816,7 @@ func (ss *Sim) TrainTrial() {
 	ss.TrialStats(true) // accumulate
 }
 
-// SleepCyc runs one 30,000 cycle trial of sleep
+// SleepCyc runs one 30,000 cycle trial of spontaneous sleep
 func (ss *Sim) SleepCyc(c [][]float64) {
 
 	viewUpdt := ss.SleepUpdt
@@ -1023,7 +1022,7 @@ func (ss *Sim) SleepCyc(c [][]float64) {
 	}
 }
 
-// SleepTrial sets up one sleep trial
+// SleepTrial sets up one spontaneous sleep trial
 func (ss *Sim) SleepTrial() {
 	ss.SleepCycInit()
 	ss.UpdateView("sleep")

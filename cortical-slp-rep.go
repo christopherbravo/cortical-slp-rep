@@ -417,7 +417,7 @@ func (ss *Sim) Counters(state string) string { // changed from boolean to string
 	} else if state == "test" {
 		return fmt.Sprintf("Run:"+" "+"%d\tEpoch:"+" "+"%d\tTrial:"+" "+"%d\tCycle:"+" "+"%d\tName:"+" "+"%s\t TrialSSE"+" "+"%.2f\t LastEpcSSE"+" "+"%.2f\t\t", ss.TrainEnv.Run.Cur, ss.TrainEnv.Epoch.Cur, ss.TestEnv.Trial.Cur, ss.Time.Cycle, fmt.Sprintf(ss.TestEnv.TrialName.Cur), ss.TrlSSE, ss.DispAvgEpcSSE)
 	} else if state == "sleep" {
-		return fmt.Sprintf("Run:"+" "+"%d\tEpoch:"+" "+"%d\tCycle:"+" "+"%d\tInhibFactor: "+" "+"%.6f\tAvgLaySim: "+" "+"%.6f\t PlusPhase:"+" "+"%t\t MinusPhase:"+" "+"%t\t\t", ss.TrainEnv.Run.Cur, ss.TrainEnv.Epoch.Cur, ss.Time.Cycle, ss.InhibFactor, ss.AvgLaySim, ss.PlusPhase, ss.MinusPhase)
+		return fmt.Sprintf("Run:"+" "+"%d\tEpoch:"+" "+"%d\tCycle:"+" "+"%d\tInhibFactor: "+" "+"%.6f\tAvgLaySim: "+" "+"%.6f\t\t\t\n PlusPhase:"+" "+"%t\t MinusPhase:"+" "+"%t\t\t\n", ss.TrainEnv.Run.Cur, ss.TrainEnv.Epoch.Cur, ss.Time.Cycle, ss.InhibFactor, ss.AvgLaySim, ss.PlusPhase, ss.MinusPhase)
 	} else if state == "strucsleep" {
 		return fmt.Sprintf("Run:"+" "+"%d\tEpoch:"+" "+"%d\tTrial:"+" "+"%d\tCycle:"+" "+"%d\tName:"+" "+"%s\t InhibFactor: "+" "+"%.4f\t LastEpcSSE"+" "+"%.2f\t\t\t\t", ss.TrainEnv.Run.Cur, ss.TrainEnv.Epoch.Cur, ss.SleepEnv.Trial.Cur, ss.Time.Cycle, fmt.Sprintf(ss.SleepEnv.TrialName.Cur), ss.InhibFactor, ss.DispAvgEpcSSE)
 	}
@@ -466,8 +466,8 @@ func (ss *Sim) SleepCycInit() {
 	// inc and dec set the rate at which synaptic depression increases and recovers at each synapse
 	if ss.SynDep {
 		for _, ly := range ss.Net.Layers {
-			inc := 0.0007 // 0.0007
-			dec := 0.0005 // 0.0005
+			inc := 0.00007 // 0.0007
+			dec := 0.00005 // 0.0005
 			ly.(*leabra.Layer).InitSdEffWt(float32(inc), float32(dec))
 		}
 	}
